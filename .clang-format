@@ -1,0 +1,13 @@
+---
+AlignOperands:   true
+AlignTrailingComments: true
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+BreakBeforeBraces: Allman
+ColumnLimit: 120
+IndentWidth: 4
+Language: Cpp
+MaxEmptyLinesToKeep: 1
+PointerAlignment: Left
+...

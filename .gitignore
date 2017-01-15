@@ -1,0 +1,13 @@
+# macOS temporary files
+.DS_Store
+
+# Python compiled files
+*.pyc
+
+# Build files
+build
+dist
+*.egg-info
+
+# Perf test data files
+perf/data
