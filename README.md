@@ -82,7 +82,7 @@ However, if you already have OpenCV installed, Lycon's advantages are minimal.
 | Read: JPG            | 0.3409 | 0.5085 (1.5x) |   1.4081 (4.1x) |     1.4628 (4.3x) |
 | Read: PNG            | 1.2114 | 1.3245 (1.1x) |   1.8274 (1.5x) |     1.8674 (1.5x) |
 | Write: JPG           | 0.4760 | 0.6046 (1.3x) |     2.3823 (5x) |    5.0159 (10.5x) |
-| Write: PNG           | 2.1421 |        2.2370 |   9.0580 (4.2x) |    11.6060 (5.4x) |
+| Write: PNG           | 2.1421 |   2.2370 (1x) |   9.0580 (4.2x) |    11.6060 (5.4x) |
 
 - Blank cells indicate that the operation is not supported by the library
 - All operations performed on a 16k (15360 x 8640) RGB image
