@@ -42,10 +42,15 @@ set(LYCON_PYTHON_SOURCES
 option(LYCON_BUILD_STATIC "Build Lycon as a static library" ON)
 option(LYCON_BUILD_PYTHON "Build the Python native extension" ON)
 option(LYCON_NUMPY_ALLOCATOR_BY_DEFAULT "Use the NumPy allocator by default" ${LYCON_BUILD_PYTHON})
+# Enabling this can avoid libstdc++ compatibility issues under environments like Conda
+option(LYCON_STATIC_LIBSTDCPP "Statically link against libstdc++" ON)
 
 include_directories(src)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -std=c++11 -O3 -fPIC -DNDEBUG -pthread")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -march=native -O3 -fPIC -DNDEBUG -pthread")
+if(LYCON_STATIC_LIBSTDCPP)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libstdc++")
+endif()
 
 # If enabled, use the NumPy allocator as the default Mat allocator
 if(LYCON_NUMPY_ALLOCATOR_BY_DEFAULT)
@@ -71,10 +76,14 @@ target_link_libraries(lycon ${JPEG_LIBRARY})
 
 # The Python extension
 if (LYCON_BUILD_PYTHON)
-  find_package(PythonLibs REQUIRED)
-  include_directories(${PYTHON_INCLUDE_DIRS})
-  target_link_libraries(lycon ${PYTHON_LIBRARIES})
+  if (NOT DEFINED ${PYTHON_INCLUDE_DIR})
+    execute_process(COMMAND python
+                    -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())"
+                    OUTPUT_VARIABLE PYTHON_INCLUDE_DIR)
+    message(STATUS "Python include path: ${PYTHON_INCLUDE_DIR}")
+  endif()
 
+  include_directories(${PYTHON_INCLUDE_DIR})
   add_library(pycon SHARED ${LYCON_PYTHON_SOURCES})
   target_link_libraries(pycon lycon)
   set_target_properties(pycon PROPERTIES PREFIX "_" OUTPUT_NAME "lycon")

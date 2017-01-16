@@ -10,7 +10,7 @@ Current set of features include:
 - Fast SIMD optimized image resizing
 - Zero-copy interop with [NumPY](http://www.numpy.org/) whenever possible
 
-Tested on Linux.
+Tested on Linux (Ubuntu 14.04) with Python`2.7.6` and `3.5.2`.
 
 ## Install
 
@@ -24,6 +24,21 @@ Native extension dependencies (along with their Ubuntu packages):
 - C++ toolchain (`sudo apt-get install build-essential`)
 - LibJPEG (`sudo apt-get install libjpeg-dev`)
 - LibPNG (`sudo apt-get install libpng-dev`)
+
+## Example
+
+```python
+import lycon
+
+# Load an image as a numpy array
+img = lycon.load('mittens.jpg')
+# Resize the image using bicubic interpolation
+resized = lycon.resize(img, width=256, height=512, interpolation=lycon.Interpolation.CUBIC)
+# Crop the image (like any regular numpy array)
+cropped = resized[:100, :200]
+# Save the image
+lycon.save('cropped-mittens.png', cropped)
+```
 
 ## Limitations
 
