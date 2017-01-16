@@ -1,5 +1,4 @@
 import os
-import tempfile
 import shutil
 import multiprocessing
 import subprocess as sp
@@ -8,7 +7,6 @@ from distutils.spawn import find_executable
 from distutils.command.build_ext import build_ext
 
 from setuptools import Extension, setup, find_packages
-from setuptools.command.install import install
 
 class BuilderError(Exception): pass
 
@@ -96,7 +94,7 @@ setup(name='lycon',
       description='A minimal and fast image library',
       author='Saumitro Dasgupta',
       author_email='sd@cs.stanford.edu',
-      url='http://github.com/ethereon/lycon',
+      url='https://github.com/ethereon/lycon',
       classifiers=[
           'Development Status :: 4 - Beta',
           'Topic :: Multimedia :: Graphics',
