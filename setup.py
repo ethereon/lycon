@@ -90,7 +90,7 @@ class LyconBuilder(build_ext):
             exit(-1)
 
 setup(name='lycon',
-      version='0.1.0',
+      version='0.1.2',
       description='A minimal and fast image library',
       author='Saumitro Dasgupta',
       author_email='sd@cs.stanford.edu',
@@ -110,6 +110,7 @@ setup(name='lycon',
       cmdclass={'build_ext': LyconBuilder},
       ext_modules=[Extension('_lycon', ['lycon.placeholder.c'])],
       packages=find_packages(),
-      keywords=['Imaging', ],
+      include_package_data=True,
+      keywords=['Imaging',],
       zip_safe=True,
-      license='Hybrid (MIT + OpenCV)')
+      license='MIT + 3-clause BSD')
