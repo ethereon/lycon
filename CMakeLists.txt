@@ -76,14 +76,26 @@ target_link_libraries(lycon ${JPEG_LIBRARY})
 
 # The Python extension
 if (LYCON_BUILD_PYTHON)
+
+  # Python include path
   if (NOT DEFINED ${PYTHON_INCLUDE_DIR})
     execute_process(COMMAND python
                     -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())"
-                    OUTPUT_VARIABLE PYTHON_INCLUDE_DIR)
+                    OUTPUT_VARIABLE PYTHON_INCLUDE_DIR
+                    OUTPUT_STRIP_TRAILING_WHITESPACE)
     message(STATUS "Python include path: ${PYTHON_INCLUDE_DIR}")
   endif()
 
-  include_directories(${PYTHON_INCLUDE_DIR})
+  # NumPy include path
+  if (NOT DEFINED ${NUMPY_INCLUDE_DIR})
+    execute_process(COMMAND python
+                    -c "import numpy; print(numpy.get_include())"
+                    OUTPUT_VARIABLE NUMPY_INCLUDE_DIR
+                    OUTPUT_STRIP_TRAILING_WHITESPACE)
+    message(STATUS "NumPy include path: ${NUMPY_INCLUDE_DIR}")
+  endif()
+
+  include_directories(${PYTHON_INCLUDE_DIR} ${NUMPY_INCLUDE_DIR})
   add_library(pycon SHARED ${LYCON_PYTHON_SOURCES})
   target_link_libraries(pycon lycon)
   set_target_properties(pycon PROPERTIES PREFIX "_" OUTPUT_NAME "lycon")
