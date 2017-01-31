@@ -8,7 +8,7 @@ Current set of features include:
 
 - Reading and writing JPEG and PNG images
 - Fast SIMD optimized image resizing
-- Zero-copy interop with [NumPY](http://www.numpy.org/) whenever possible
+- Zero-copy interop with [NumPy](http://www.numpy.org/) whenever possible
 
 Tested on Linux (Ubuntu 14.04) with Python`2.7.6` and `3.5.2`.
 
@@ -87,8 +87,7 @@ However, if you already have OpenCV installed, Lycon's advantages are minimal.
 - Blank cells indicate that the operation is not supported by the library
 - All operations performed on a 16k (15360 x 8640) RGB image
 - Tests performed on Ubuntu 14.04 running on an Intel Core i7 (Skylake)
-- OpenCV `3.2+ (master: a85b4b5)`, Pillow `4.0.0`, skimage `0.12.3`
-- Python `2.7.3`
+- OpenCV `3.2+ (master: a85b4b5)`, Pillow `4.0.0`, skimage `0.12.3`, Python `2.7.3`
 - OpenCV can potentially achieve better performance with GPU implementations and proprietary libraries like Intel IPP
 
 ## License
