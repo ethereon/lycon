@@ -29,7 +29,6 @@ if (NOT DEFINED ${PYTHON_LIB_PATH})
   find_library(PYTHON_LIB_PATH
                NAMES python${PYTHON_VERSION}
                PATHS ${PYTHON_LIB_DIR}
-               NO_DEFAULT_PATH
                NO_SYSTEM_ENVIRONMENT_PATH)
   message(STATUS "Python library path: ${PYTHON_LIB_PATH}")
 endif()
