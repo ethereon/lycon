@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 2.8.11)
 
 project(lycon)
 
-set(LYCON_SOURCES
+include(cmake/LyconUtils.cmake)
 
+set(LYCON_SOURCES
   src/lycon/io/base.cc
   src/lycon/io/bitstream.cc
   src/lycon/io/exif.cc
@@ -38,12 +39,14 @@ set(LYCON_PYTHON_SOURCES
   src/lycon/python/module.cc
 )
 
+set(CMAKE_MACOSX_RPATH TRUE)
+
 # Build options
-option(LYCON_BUILD_STATIC "Build Lycon as a static library" ON)
-option(LYCON_BUILD_PYTHON "Build the Python native extension" ON)
-option(LYCON_NUMPY_ALLOCATOR_BY_DEFAULT "Use the NumPy allocator by default" ${LYCON_BUILD_PYTHON})
+lycon_option(LYCON_BUILD_STATIC "Build Lycon as a static library" ON)
+lycon_option(LYCON_BUILD_PYTHON "Build the Python native extension" ON)
+lycon_option(LYCON_NUMPY_ALLOCATOR_BY_DEFAULT "Use the NumPy allocator by default" ${LYCON_BUILD_PYTHON})
 # Enabling this can avoid libstdc++ compatibility issues under environments like Conda
-option(LYCON_STATIC_LIBSTDCPP "Statically link against libstdc++" ON)
+lycon_option(LYCON_STATIC_LIBSTDCPP "Statically link against libstdc++" ON IF NOT APPLE)
 
 include_directories(src)
 
@@ -76,27 +79,13 @@ target_link_libraries(lycon ${JPEG_LIBRARY})
 
 # The Python extension
 if (LYCON_BUILD_PYTHON)
-
-  # Python include path
-  if (NOT DEFINED ${PYTHON_INCLUDE_DIR})
-    execute_process(COMMAND python
-                    -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())"
-                    OUTPUT_VARIABLE PYTHON_INCLUDE_DIR
-                    OUTPUT_STRIP_TRAILING_WHITESPACE)
-    message(STATUS "Python include path: ${PYTHON_INCLUDE_DIR}")
-  endif()
-
-  # NumPy include path
-  if (NOT DEFINED ${NUMPY_INCLUDE_DIR})
-    execute_process(COMMAND python
-                    -c "import numpy; print(numpy.get_include())"
-                    OUTPUT_VARIABLE NUMPY_INCLUDE_DIR
-                    OUTPUT_STRIP_TRAILING_WHITESPACE)
-    message(STATUS "NumPy include path: ${NUMPY_INCLUDE_DIR}")
-  endif()
+  include(cmake/LocatePythonLibs.cmake)
 
   include_directories(${PYTHON_INCLUDE_DIR} ${NUMPY_INCLUDE_DIR})
+  link_directories(${PYTHON_LIB_DIR})
+
   add_library(pycon SHARED ${LYCON_PYTHON_SOURCES})
-  target_link_libraries(pycon lycon)
-  set_target_properties(pycon PROPERTIES PREFIX "_" OUTPUT_NAME "lycon")
+  target_link_libraries(pycon lycon ${PYTHON_LIB_PATH})
+  # NOTE(saumitro): Even on macOS, Python expects the ".so" suffix rather than ".dylib"
+  set_target_properties(pycon PROPERTIES PREFIX "_" SUFFIX ".so" OUTPUT_NAME "lycon")
 endif()
