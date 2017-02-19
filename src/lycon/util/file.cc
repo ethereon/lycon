@@ -1,5 +1,6 @@
 #include "lycon/util/file.h"
 
+#include <cstdlib>
 #include <unistd.h>
 
 namespace lycon
