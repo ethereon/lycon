@@ -34,17 +34,17 @@ static int pycon_clear(PyObject* m)
 static struct PyModuleDef module_defs = {PyModuleDef_HEAD_INIT, module_name, NULL, 0, module_methods, NULL,
                                          pycon_traverse,        pycon_clear, NULL};
 
-#define MODUDLE_INIT_SIGNATURE PyMODINIT_FUNC PyInit__lycon(void)
+#define MODULE_INIT_SIGNATURE PyMODINIT_FUNC PyInit__lycon(void)
 #define MODULE_INIT_RETURN_ON_ERROR NULL
 
 #else
 
-#define MODUDLE_INIT_SIGNATURE PyMODINIT_FUNC init_lycon(void)
+#define MODULE_INIT_SIGNATURE PyMODINIT_FUNC init_lycon(void)
 #define MODULE_INIT_RETURN_ON_ERROR
 
 #endif
 
-extern "C" MODUDLE_INIT_SIGNATURE
+MODULE_INIT_SIGNATURE
 {
 #if PY_MAJOR_VERSION >= 3
     PyObject* module = PyModule_Create(&module_defs);
