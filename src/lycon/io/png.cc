@@ -17,7 +17,7 @@
 #define _FILE_OFFSET_BITS 0
 #endif
 
-#include <libpng/png.h>
+#include <png.h>
 #include <zlib.h>
 
 #if defined _MSC_VER && _MSC_VER >= 1200
