@@ -1,4 +1,5 @@
 recursive-include src *
+recursive-include cmake *
 include CMakeLists.txt
 include LICENSE
 include README.md
