@@ -10,7 +10,10 @@ Current set of features include:
 - Fast SIMD optimized image resizing
 - Zero-copy interop with [NumPy](http://www.numpy.org/) whenever possible
 
-Tested on Linux (Ubuntu 14.04) with Python`2.7.6` and `3.5.2`.
+Tested on:
+
+- Linux (Ubuntu 14.04) with Python`2.7.6` and `3.5.2`.
+- macOS (Sierra, 10.12) with Python `2.7.11` and `3.5.1`.
 
 ## Install
 
@@ -20,10 +23,16 @@ pip install lycon
 
 Native extension dependencies (along with their Ubuntu packages):
 
-- CMake 2.8 or newer (`sudo apt-get install cmake`)
-- C++ toolchain (`sudo apt-get install build-essential`)
-- LibJPEG (`sudo apt-get install libjpeg-dev`)
-- LibPNG (`sudo apt-get install libpng-dev`)
+- CMake 2.8 or newer
+- C++ toolchain
+- LibJPEG
+- LibPNG
+
+Single-line command for installing all dependencies:
+
+```
+sudo apt-get install cmake build-essential libjpeg-dev libpng-dev
+```
 
 ## Example
 
