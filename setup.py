@@ -1,4 +1,5 @@
 import os
+import sys
 import shutil
 import multiprocessing
 import subprocess as sp
@@ -49,7 +50,8 @@ class LyconBuilder(build_ext):
         Run cmake.
         """
         print('Source path is {}'.format(self.source_path))
-        self.execute([self.cmake_path, self.source_path])
+        python_bin = '-DPYTHON_BIN={}'.format(sys.executable)
+        self.execute([self.cmake_path, self.source_path, python_bin])
 
     def make(self, parallel=True):
         """
