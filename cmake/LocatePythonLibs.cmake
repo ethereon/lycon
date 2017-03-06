@@ -30,8 +30,12 @@ if (NOT DEFINED ${PYTHON_LIB_PATH})
 
   # Get the full Python lib path
   # First search in the precise location indicated by Python
+  # The following Python lib suffixes are known and supported:
+  #   * m   (configured --with-pymalloc)
+  #   * dm  (configured --with-pydebug and --with-pymalloc)
+  set (PYTHON_LIB_PREFIX python${PYTHON_VERSION})
   find_library(PYTHON_LIB_PATH
-               NAMES python${PYTHON_VERSION}
+               NAMES ${PYTHON_LIB_PREFIX} ${PYTHON_LIB_PREFIX}m ${PYTHON_LIB_PREFIX}dm
                PATHS ${PYTHON_LIB_DIR}
                NO_DEFAULT_PATH
                NO_CMAKE_ENVIRONMENT_PATH
@@ -43,7 +47,7 @@ if (NOT DEFINED ${PYTHON_LIB_PATH})
   if (NOT PYTHON_LIB_PATH)
     message(STATUS "Expanding search for libpython")
     find_library(PYTHON_LIB_PATH
-                 NAMES python${PYTHON_VERSION}
+                 NAMES ${PYTHON_LIB_PREFIX} ${PYTHON_LIB_PREFIX}m ${PYTHON_LIB_PREFIX}dm
                  PATHS ${PYTHON_LIB_DIR})
   endif()
 endif()
