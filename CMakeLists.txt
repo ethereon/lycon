@@ -82,7 +82,6 @@ if (LYCON_BUILD_PYTHON)
   include(cmake/LocatePythonLibs.cmake)
 
   include_directories(${PYTHON_INCLUDE_DIR} ${NUMPY_INCLUDE_DIR})
-  link_directories(${PYTHON_LIB_DIR})
 
   add_library(pycon SHARED ${LYCON_PYTHON_SOURCES})
   target_link_libraries(pycon lycon ${PYTHON_LIB_PATH})
