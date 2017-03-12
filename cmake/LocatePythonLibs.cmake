@@ -37,11 +37,7 @@ if (NOT DEFINED ${PYTHON_LIB_PATH})
   find_library(PYTHON_LIB_PATH
                NAMES ${PYTHON_LIB_PREFIX} ${PYTHON_LIB_PREFIX}m ${PYTHON_LIB_PREFIX}dm
                PATHS ${PYTHON_LIB_DIR}
-               NO_DEFAULT_PATH
-               NO_CMAKE_ENVIRONMENT_PATH
-               NO_CMAKE_PATH
-               NO_SYSTEM_ENVIRONMENT_PATH
-               NO_CMAKE_SYSTEM_PATH)
+               NO_DEFAULT_PATH)
 
   # If the targeted search fails, look in cmake default locations
   if (NOT PYTHON_LIB_PATH)
