@@ -21,17 +21,27 @@ Tested on:
 pip install lycon
 ```
 
-Native extension dependencies (along with their Ubuntu packages):
+Native extension dependencies:
 
 - CMake 2.8 or newer
 - C++ toolchain
 - LibJPEG
 - LibPNG
 
+### Ubuntu
+
 Single-line command for installing all dependencies:
 
 ```
 sudo apt-get install cmake build-essential libjpeg-dev libpng-dev
+```
+
+### Anaconda
+
+When working within an Anaconda Python distribution, it is recommended to use the latest `cmake` version (`3.6` or newer). Older versions can lead to a mismatch between the `libpng` and `libjpeg` headers used to build Lycon (usually the system headers), and the linked library (which may be preempted by the Anaconda-scoped version). To install the latest `cmake` version:
+
+```
+conda install cmake
 ```
 
 ## Example
