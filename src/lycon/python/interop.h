@@ -54,7 +54,6 @@ template <typename _Tp> std::vector<_Tp> vector_from_pyobject(PyObject* obj)
     for (int i = 0; i < num_elems; i++)
     {
         PyObject* item = items[i];
-        PyObject* seq_i = 0;
         if (PyInt_Check(item))
         {
             int v = (int)PyInt_AsLong(item);
@@ -80,7 +79,6 @@ template <typename _Tp> std::vector<_Tp> vector_from_pyobject(PyObject* obj)
         {
             break;
         }
-        Py_XDECREF(seq_i);
     }
     Py_DECREF(seq);
     LYCON_ASSERT(output_vec.size() == num_elems);
