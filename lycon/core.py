@@ -20,7 +20,7 @@ def save(path, image, options=None):
     """
     if options is not None:
         # Convert to a flat (key_1, value_1, key_2, value_2, ...) list
-        options = list(itertools.chain(options.items()))
+        options = list(itertools.chain(*options.items()))
     _lycon.save(path, image, options)
 
 def resize(image, width, height, interpolation=Interpolation.LINEAR, output=None):
