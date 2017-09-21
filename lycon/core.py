@@ -33,7 +33,7 @@ def resize(image, width, height, interpolation=Interpolation.LINEAR, output=None
     assert 2 <= len(image.shape) <= 4
     if output is not None:
         assert output.dtype == image.dtype
-        assert len(output.shape) == len(input.shape)
+        assert len(output.shape) == len(image.shape)
         assert output.shape[:2] == (height, width)
     return _lycon.resize(image, (width, height), interpolation, output)
 
