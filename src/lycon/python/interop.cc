@@ -318,7 +318,7 @@ PyObject* ndarray_from_mat(const Mat& mat)
 std::string string_from_pyobject(PyObject* object)
 {
     PYCON_ASSERT_NOT_NONE(object);
-    char* str = PyString_AsString(object);
+    const char* str = PyString_AsString(object);
     LYCON_ASSERT(str)
     return std::string(str);
 }
