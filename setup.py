@@ -92,7 +92,7 @@ class LyconBuilder(build_ext):
             exit(-1)
 
 setup(name='lycon',
-      version='0.1.9',
+      version='0.2.0',
       description='A minimal and fast image library',
       author='Saumitro Dasgupta',
       author_email='sd@cs.stanford.edu',

@@ -7,7 +7,7 @@
 
 namespace lycon
 {
-#define LYCON_VERSION_STRING "0.1.9"
+#define LYCON_VERSION_STRING "0.2.0"
 
 // Type aliases
 using uchar = unsigned char;
